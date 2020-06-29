@@ -1,5 +1,5 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-    <?php include APPROOT . '/views/inc/navbar.php' ?>
+    <?php require APPROOT . '/views/inc/navbar.php' ?>
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
             <h1 class="display-3"><?php echo $data['title']; ?></h1>

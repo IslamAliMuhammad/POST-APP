@@ -1,7 +1,7 @@
 <?php
     /* 
      * App Core Class
-     * Creates URL & load core controller
+     * Extract controller, method, params from URL then load the controller and execute the method with the params
      * URL FORMAT - /controller/method/params
      */
     class Core {

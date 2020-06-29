@@ -1,7 +1,7 @@
 <?php
     /**
      * PDO Database Class
-     * Connect to database 
+     * Use PDO to establish a connection and interact with database  
      */
 
     class Database {
@@ -36,7 +36,7 @@
         }
 
         public function bind($params, $value, $type = null){
-            if(is_nul($type)){
+            if(is_null($type)){
                 switch(true){
                     case is_int($value):
                         $type = PDO::PARAM_INT;
