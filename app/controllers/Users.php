@@ -28,9 +28,8 @@
                 if(empty($formData['email'])){
                     $formData['emailError'] = 'Please enter your email';
                 }else{
-                    $isEmailTaken = $this->userModel->findUserByEmail($formData['email']);
-                    echo $isEmailTaken;
-                    $formData['emailError'] = $isEmailTaken ? 'Email is already taken' : '';
+                    $user = $this->userModel->findUserByEmail($formData['email']);
+                    $formData['emailError'] = $user ? 'Email is already taken' : '';
                 }
 
                 if(empty($formData['password'])){
@@ -86,6 +85,11 @@
 
                 if(empty($formData['email'])){
                     $formData['emailError'] = 'Please enter your email';
+                }else{
+                    $user = $this->userModel($formData['email']);
+                    if(!$user){
+                        $formData['emailError'] = 'No user found';
+                    }
                 }
 
                 if(empty($formData['password'])){
@@ -93,7 +97,7 @@
                 }
               
                 if(empty($formData['emailError']) && empty($formData['passwordError'])){
-                    die('SUCCESS');
+                    
                 }else {
                     $this->view('users/login', $formData);
                 }

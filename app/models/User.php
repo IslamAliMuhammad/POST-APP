@@ -13,13 +13,7 @@
 
             $row = $this->db->single();
 
-            if($this->db->rowCount() > 0){
-                // $email exist in database 
-                return true;
-            }else{
-                // $email doesn't exist in database
-                return false;
-            }
+            return $row;
         }
 
         public function registerUser($user){
@@ -35,6 +29,10 @@
             $isSuccess = $this->db->execute();
 
             return $isSuccess;
+        }
+
+        public function login($email, $password){
+
         }
     }
 ?>
