@@ -31,8 +31,15 @@
             return $isSuccess;
         }
 
-        public function login($email, $password){
-
+        public function loginUser($email, $password){
+            $user = $this->findUserByEmail($email);
+            
+            $arePasswordsMatch = password_verify($password, $user->password);
+            if($arePasswordsMatch){
+                return $user;
+            }else{
+                return false;
+            }
         }
     }
 ?>

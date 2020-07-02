@@ -86,7 +86,7 @@
                 if(empty($formData['email'])){
                     $formData['emailError'] = 'Please enter your email';
                 }else{
-                    $user = $this->userModel($formData['email']);
+                    $user = $this->userModel->findUserByEmail($formData['email']);
                     if(!$user){
                         $formData['emailError'] = 'No user found';
                     }
@@ -97,7 +97,14 @@
                 }
               
                 if(empty($formData['emailError']) && empty($formData['passwordError'])){
-                    
+                    $userLoggedIn = $this->userModel->loginUser($formData['email'], $formData['password']);
+                    if($userLoggedIn){
+                        $this->createUserSession($userLoggedIn);
+                        redirect('pages/index');
+                    }else{
+                        $formData['passwordError'] = 'Password incorrect';
+                        $this->view('users/login', $formData);
+                    }
                 }else {
                     $this->view('users/login', $formData);
                 }
@@ -110,5 +117,19 @@
             }
 
         } 
+
+        public function createUserSession($user){
+            $_SESSION['user_id'] = $user->id;
+            $_SESSION['user_name'] = $user->name;
+            $_SESSION['user_email'] = $user->email;
+        }
+        
+        public function logout(){
+            unset($_SESSION['user_id']);
+            unset($_SESSION['user_name']);
+            unset($_SESSION['user_email']);
+            session_destroy();
+            redirect('users/login');
+        }
     }
 ?>
