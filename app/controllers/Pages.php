@@ -5,6 +5,9 @@
         }
 
         public function index(){
+            if(isLoggedIn()){
+                redirect('posts/index');
+            }
             $data = [
                 'title'=> 'SharePosts',
                 'description' => 'Simple social network built on the PHP_MVC_FRAMEWORK',

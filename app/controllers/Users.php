@@ -100,7 +100,7 @@
                     $userLoggedIn = $this->userModel->loginUser($formData['email'], $formData['password']);
                     if($userLoggedIn){
                         $this->createUserSession($userLoggedIn);
-                        redirect('pages/index');
+                        redirect('posts/index');
                     }else{
                         $formData['passwordError'] = 'Password incorrect';
                         $this->view('users/login', $formData);
