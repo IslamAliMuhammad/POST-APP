@@ -31,5 +31,16 @@
 
             return $row;
         }
+
+        public function updatePost($data){
+            $this->db->query('UPDATE posts SET title = :title, body = :body WHERE id = :id');
+
+            $this->db->bind(':title', $data['title']);
+            $this->db->bind(':body', $data['body']);
+            $this->db->bind(':id', $data['id']);
+
+            return $this->db->execute();
+
+        }
     }
 ?>

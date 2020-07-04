@@ -74,5 +74,58 @@
 
             $this->view('posts/show', $data);
         }
+
+        public function edit($id){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $data = [
+                    'id' => $id,
+                    'title' => trim($_POST['title']),
+                    'body' => trim($_POST['body']),
+                    'title_error' => '',
+                    'body_error' => '',
+                ];
+
+                // VALIDATE DATA INPUT
+
+                if(empty($data['title'])){
+                    $data['title_error'] = 'Please enter title';
+                }
+
+                if(empty($data['body'])){
+                    $data['body_error'] = 'Please enter body text';
+                }
+
+                if(empty($data['title_error']) && empty($data['body_error'])){
+                    // update database
+                    $isPostUpdated = $this->postModel->updatePost($data);
+
+                    if($isPostUpdated){
+                        flash('post_message', 'Post Updated');
+                        redirect('post/index');
+                    }else{
+                        die('Somthing went wrong');
+                    }
+                }else{
+                    $this->view('posts/edit', $data);
+                }
+
+            }else{
+                $post = $this->postModel->getUserPost($id);
+                if($_SESSION['user_id'] == $post->user_id){
+                    $data = [
+                        'id' => $id,
+                        'title' => $post->title,
+                        'body' => $post->body,
+                    ];
+                    $this->view('posts/edit', $data);
+                }else{
+                    redirect('posts/index');
+                }
+                
+            }
+           
+        }
     }
 ?>
