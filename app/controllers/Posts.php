@@ -64,7 +64,7 @@
 
         public function show($id){
 
-            $post = $this->postModel->getUserPost($id);
+            $post = $this->postModel->getPostByID($id);
             $user = $this->userModel->getUserByID($post->user_id);
 
             $data = [
@@ -112,7 +112,8 @@
                 }
 
             }else{
-                $post = $this->postModel->getUserPost($id);
+                $post = $this->postModel->getPostByID($id);
+
                 if($_SESSION['user_id'] == $post->user_id){
                     $data = [
                         'id' => $id,
@@ -126,6 +127,29 @@
                 
             }
            
+        }
+
+        public function delete($id){
+            $post = $this->postModel->getPostByID($id);
+
+            if($_SESSION['user_id'] != $post->user_id){
+                redirect('posts/index');
+            }
+            
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+                $isDeleted = $this->postModel->deletePost($id);
+
+                if($isDeleted){
+                    flash('post_message', 'Post Successfully Deleted');
+                    redirect('posts/index');
+                }else{
+                    die('Something went wrong');
+                }
+
+            }else{
+                redirect('posts/index');
+            }
         }
     }
 ?>

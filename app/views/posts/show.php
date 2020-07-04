@@ -15,14 +15,12 @@
                 <?php if($data['post']->user_id == $_SESSION['user_id']) { ?>
                 <div class="row mt-5">
                     <div class="col-6">
-                        <a class="btn btn-primary" href="<?php echo URLROOT . '/posts/edit/' . $data['post']->id; ?>">
-                            <i class="fas fa-edit fa-lg"> Edit</i>
-                        </a>
+                        <a class="btn btn-dark" href="<?php echo URLROOT . '/posts/edit/' . $data['post']->id; ?>">Edit</a>
                     </div>
                     <div class="col-6">
-                        <a class="btn btn-primary float-right" href="<?php echo URLROOT . '/posts/delete/' . $data['post']->id; ?>">
-                            <i class="fas fa-trash-alt fa-lg"> Delete</i>
-                        </a>
+                        <form action="<?php echo URLROOT . '/posts/delete/' . $data['post']->id; ?>" method="post">
+                            <input type="submit" value="Delete" class="btn btn-danger float-right">
+                        </form>
                     </div>
                 </div>
                 <?php } ?>

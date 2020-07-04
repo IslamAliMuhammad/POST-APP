@@ -18,6 +18,9 @@
       <ul class="navbar-nav ml-auto">
         <?php if(isLoggedIn()) { ?>
         <li class="nav-item">
+          <a class="nav-link" href="#" ><?php echo 'Welcome ' . $_SESSION['user_name']; ?></a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </li>
         <?php }else {?>
