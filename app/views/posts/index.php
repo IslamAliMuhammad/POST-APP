@@ -18,7 +18,7 @@
                     <h5 class="card-title"><?php echo $post->title;?></h5>
                     <h6 class="card-subtitle mb-2 text-muted">Written by <?php echo $post->name; ?> on <?php echo $post->postCreatedAt; ?></h6>
                     <p class="card-text"><?php echo $post->body; ?></p>
-                    <a href="#" class="card-link">More</a>
+                    <a href="<?php echo URLROOT . '/posts/show/' . $post->postID; ?>" class="card-link">More</a>
                 </div>
             </div>
         <?php } ?>

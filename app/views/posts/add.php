@@ -2,6 +2,9 @@
     <?php require APPROOT . '/views/inc/navbar.php' ?>
     <div class='container'>
         <div class='card card-body bg-light'>
+            <a href="<?php echo URLROOT . '/posts/index';?>" class="mb-4">
+                <i class="fas fa-arrow-circle-left fa-2x"></i>
+            </a>
             <h2 class='card-title'>Add Post</h5>
             <p class='card-subtitle mb-2 text-muted'>Create a post with this form</p>
             <form action="<?php echo URLROOT . '/posts/add'; ?>" method="post">

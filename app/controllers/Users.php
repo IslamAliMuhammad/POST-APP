@@ -9,7 +9,7 @@
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $formData = [
+                $data = [
                     'userName' => trim($_POST['userName']),
                     'email' => trim($_POST['email']),
                     'password' => trim($_POST['password']),
@@ -21,50 +21,50 @@
                 ];
 
                 // Validate form inputs
-                if(empty($formData['userName'])){
-                    $formData['userNameError'] = 'Please enter user name';
+                if(empty($data['userName'])){
+                    $data['userNameError'] = 'Please enter user name';
                 }
 
-                if(empty($formData['email'])){
-                    $formData['emailError'] = 'Please enter your email';
+                if(empty($data['email'])){
+                    $data['emailError'] = 'Please enter your email';
                 }else{
-                    $user = $this->userModel->findUserByEmail($formData['email']);
-                    $formData['emailError'] = $user ? 'Email is already taken' : '';
+                    $user = $this->userModel->findUserByEmail($data['email']);
+                    $data['emailError'] = $user ? 'Email is already taken' : '';
                 }
 
-                if(empty($formData['password'])){
-                    $formData['passwordError'] = 'Please enter password';
-                }elseif(strlen($formData['password']) < 6){
-                    $formData['passwordError'] = 'Password must be at least 6 characters';
+                if(empty($data['password'])){
+                    $data['passwordError'] = 'Please enter password';
+                }elseif(strlen($data['password']) < 6){
+                    $data['passwordError'] = 'Password must be at least 6 characters';
                 }
 
-                if(empty($formData['confirmPassword'])){
-                    $formData['confirmPasswordError'] = 'Please enter confirm passworm';
-                }elseif($formData['password'] != $formData['confirmPassword']){
-                    $formData['confirmPasswordError'] = 'Passwords do not match';
+                if(empty($data['confirmPassword'])){
+                    $data['confirmPasswordError'] = 'Please enter confirm passworm';
+                }elseif($data['password'] != $data['confirmPassword']){
+                    $data['confirmPasswordError'] = 'Passwords do not match';
                 }
                 
-                if(empty($formData['userNameError']) && empty($formData['emailError']) && empty($formData['passwordError']) && empty($formData['confirmPasswordError'])){
+                if(empty($data['userNameError']) && empty($data['emailError']) && empty($data['passwordError']) && empty($data['confirmPasswordError'])){
 
 
-                    $formData['password'] = password_hash($formData['password'], PASSWORD_DEFAULT);
-                    $isRegistered = $this->userModel->registerUser($formData);
+                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                    $isRegistered = $this->userModel->registerUser($data);
                     if($isRegistered){
                         flash('register_success', 'You are now registered and can log in');
                         redirect('users/login');
                     }
 
                 }else {
-                    $this->view('users/register', $formData);
+                    $this->view('users/register', $data);
                 }
             }else{
-                $formData = [
+                $data = [
                     'userName' => '',
                     'email' => '',
                     'password' => '',
                     'confirmPassword' => '',
                 ];
-                $this->view('users/register', $formData);
+                $this->view('users/register', $data);
             }
 
         } 
@@ -74,7 +74,7 @@
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
             if($_SERVER['REQUEST_METHOD'] == 'POST'){
-                $formData = [
+                $data = [
                     'email' => trim($_POST['email']),
                     'password' => trim($_POST['password']),
                     'emailError' => '',
@@ -83,37 +83,37 @@
 
                 // Validate form inputs
 
-                if(empty($formData['email'])){
-                    $formData['emailError'] = 'Please enter your email';
+                if(empty($data['email'])){
+                    $data['emailError'] = 'Please enter your email';
                 }else{
-                    $user = $this->userModel->findUserByEmail($formData['email']);
+                    $user = $this->userModel->findUserByEmail($data['email']);
                     if(!$user){
-                        $formData['emailError'] = 'No user found';
+                        $data['emailError'] = 'No user found';
                     }
                 }
 
-                if(empty($formData['password'])){
-                    $formData['passwordError'] = 'Please enter password';
+                if(empty($data['password'])){
+                    $data['passwordError'] = 'Please enter password';
                 }
               
-                if(empty($formData['emailError']) && empty($formData['passwordError'])){
-                    $userLoggedIn = $this->userModel->loginUser($formData['email'], $formData['password']);
+                if(empty($data['emailError']) && empty($data['passwordError'])){
+                    $userLoggedIn = $this->userModel->loginUser($data['email'], $data['password']);
                     if($userLoggedIn){
                         $this->createUserSession($userLoggedIn);
                         redirect('posts/index');
                     }else{
-                        $formData['passwordError'] = 'Password incorrect';
-                        $this->view('users/login', $formData);
+                        $data['passwordError'] = 'Password incorrect';
+                        $this->view('users/login', $data);
                     }
                 }else {
-                    $this->view('users/login', $formData);
+                    $this->view('users/login', $data);
                 }
             }else{
-                $formData = [
+                $data = [
                     'email' => '',
                     'password' => '',
                 ];
-                $this->view('users/login', $formData);
+                $this->view('users/login', $data);
             }
 
         } 
