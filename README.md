@@ -1,20 +1,20 @@
 # Post App
-A social network built upon my [PHP-MVC-FRAMEWORK](https://github.com/IslamAliMuhammad/PHP-MVC-FRAMEWORK) that allows authenticated user to show other users tweets and perform operations on his tweets.
+A social network built upon my [PHP-MVC-FRAMEWORK](https://github.com/IslamAliMuhammad/PHP-MVC-FRAMEWORK) that allows authenticated user to show other users posts and perform operations on his posts.
 
 ## Getting Started
 
 1. Open command line then navigate to `xampp\htdocs`.
 2. Enter `git clone https://github.com/IslamAliMuhammad/POST-APP.git`.
-3. Navigate to app/config folder then open config.php file then enter DB_PASS if found. 
-4. Create a database with the name shareposts.
-5. Import tweet SQL file inside the database which will create two tables (posts, users).
+3. Navigate to `app/config` folder then open `config.php` file then enter `DB_PASS` if found. 
+4. Create a database with the name `post`.
+5. Import `post.sql` file inside the database which will create two tables (posts, users).
 6. Enter `http://localhost/post/` into your browser.
 
 ![](https://github.com/IslamAliMuhammad/POST-APP/blob/master/screenshot.PNG)
 
 ### Files structure 
 
-- __posts__
+- __post__
    - [README.md](README.md)
    - __app__
      - [bootstrap.php](app/bootstrap.php)
