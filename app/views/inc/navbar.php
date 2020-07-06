@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-info mb-4">
   <div class='container'>
     <a class="navbar-brand font-weight-bold" href="<?php echo URLROOT; ?>"><?php echo SITENAME; ?></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"

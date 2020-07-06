@@ -9,8 +9,8 @@
                 redirect('posts/index');
             }
             $data = [
-                'title'=> 'SharePosts',
-                'description' => 'Simple social network built on the PHP_MVC_FRAMEWORK',
+                'title'=> 'POST',
+                'description' => 'Social network built on the PHP_MVC_FRAMEWORK',
             ];
             $this->view('pages/index', $data);
         }
@@ -18,7 +18,7 @@
         public function about(){
             $data = [
                 'title'=> 'About Us',
-                'description' => 'App to share posts with other users',
+                'description' => 'App to Post with other users',
             ];
             $this->view('pages/about', $data);
         }
