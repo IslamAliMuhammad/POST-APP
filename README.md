@@ -10,7 +10,7 @@ A social network built upon my [PHP-MVC-FRAMEWORK](https://github.com/IslamAliMu
 5. Import tweet SQL file inside the database which will create two tables (posts, users).
 6. Enter `http://localhost/post/` into your browser.
 
-![](screenshot.png)
+![](https://github.com/IslamAliMuhammad/POST-APP/blob/master/screenshot.PNG)
 
 ### Files structure 
 
